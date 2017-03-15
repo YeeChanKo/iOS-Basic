@@ -34,7 +34,7 @@
         NSLog(@"%@",error);
     else
     {
-        NSString *regex = [NSString stringWithFormat:@".*\.@%", extension];
+        NSString *regex = [NSString stringWithFormat:@".*\\.%@$", extension];
         NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
         for(NSString* fileAndFolder in filesAndFolders)
             if([test evaluateWithObject:fileAndFolder])
