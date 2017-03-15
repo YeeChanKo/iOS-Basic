@@ -12,29 +12,49 @@
 
 -(id)initWithCapacity:(int)capacity;
 {
-    _capacity = capacity;
-    _pens = [[NSMutableArray alloc] initWithCapacity:capacity];
-    return self;
+    if(self = [super init]){
+        _capacity = capacity;
+        _pens = [[NSMutableArray alloc] initWithCapacity:capacity];
+        return self;
+    }
+    else
+        return nil;
 }
 
 -(void)add:(NXPen *)pen;
 {
     [_pens addObject:pen];
+    NSLog(@"* 알림: 펜 하나 추가됨");
 }
 
 -(void)remove:(int)penIndex;
 {
-    [_pens removeObjectAtIndex:penIndex];
+    if(penIndex < [_pens count])
+    {
+        [_pens removeObjectAtIndex:penIndex];
+        NSLog(@"* 알림: 펜 하나 삭제됨");
+    }
+    else
+        NSLog(@"* 삭제오류: 그런 펜 없어요");
 }
 
 -(int)usage;
 {
-    return [_pens count];
+    double count = (double)[_pens count];
+    _usage = (int)(count/_capacity*100);
+    return _usage;
 }
 
 -(void)printDescription;
 {
-    NSLog(@"pens=%@",_pens);
+    int count = (int)[_pens count];
+    NSLog(@"---펜홀더 총 %d 중 %d 사용, %d%% 사용율---",
+          _capacity, count, [self usage]);
+    for(int i = 0; i < count; i++)
+    {
+        [[_pens objectAtIndex:i] printDescription];
+    }
+    NSLog(@"----------펜홀더-내용-끝----------");
 }
 
 @end

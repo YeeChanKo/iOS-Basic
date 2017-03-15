@@ -12,8 +12,12 @@
 
 -(id)initWithBrand:(NSString*)brand;
 {
-    _brand = brand;
-    return self;
+    if(self = [super init]){
+        _brand = brand;
+        return self;
+    }
+    else
+        return nil;
 }
 
 -(NSString*)brand;
@@ -49,7 +53,7 @@
 
 -(void)printDescription;
 {
-    
+    NSLog(@"브랜드가 %@이고 %d%% 사용가능한 %@ 색상의 펜", _brand, _usage, _color);
 }
 
 @end
