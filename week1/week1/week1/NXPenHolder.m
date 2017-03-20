@@ -12,13 +12,13 @@
 
 -(id)initWithCapacity:(int)capacity;
 {
-    if(self = [super init]){
-        _capacity = capacity;
-        _pens = [[NSMutableArray alloc] initWithCapacity:capacity];
-        return self;
-    }
-    else
-        return nil;
+    self = [super init];
+    if(!self) return nil;
+    
+    _capacity = capacity;
+    _pens = [[NSMutableArray alloc] initWithCapacity:capacity];
+    
+    return self;
 }
 
 -(void)add:(NXPen *)pen;
@@ -32,6 +32,7 @@
     if(penIndex < [_pens count])
     {
         [_pens removeObjectAtIndex:penIndex];
+        // NSMutableArray removeObjectAtIndex 안에서 알아서 release 해준다
         NSLog(@"* 알림: 펜 하나 삭제됨");
     }
     else

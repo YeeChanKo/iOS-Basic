@@ -65,9 +65,9 @@
 			children = (
 				70C6E0CF1E7943D5009FC501 /* main.m */,
 				70C6E0D61E7945D6009FC501 /* NXPen.h */,
+				70C6E0D71E7945D6009FC501 /* NXPen.m */,
 				70C6E0D91E794EB7009FC501 /* NXPenHolder.h */,
 				70C6E0DA1E794EB7009FC501 /* NXPenHolder.m */,
-				70C6E0D71E7945D6009FC501 /* NXPen.m */,
 			);
 			path = week1;
 			sourceTree = "<group>";
@@ -258,6 +258,7 @@
 				70C6E0D51E7943D5009FC501 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

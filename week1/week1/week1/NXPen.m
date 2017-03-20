@@ -12,12 +12,12 @@
 
 -(id)initWithBrand:(NSString*)brand;
 {
-    if(self = [super init]){
-        _brand = brand;
-        return self;
-    }
-    else
-        return nil;
+    self = [super init];
+    if(!self) return nil;
+    
+    _brand = brand;
+    
+    return self;
 }
 
 -(NSString*)brand;
