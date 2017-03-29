@@ -68,8 +68,6 @@
     NSNumberFormatter* f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber* num = [f numberFromString:string];
-    NSLog(@"%@",num);
-    
     return num;
 }
 
@@ -139,21 +137,6 @@
     }];
     
     return sortedArray;
-}
-
-- (NSArray*) filterByTeam:(NSNumber *)team;
-{
-    
-}
-
-- (NSArray*) filterByGender:(BOOL)isMale;
-{
-    
-}
-
-- (NSArray*) filterDistinctByLastName;
-{
-    
 }
 
 @end
