@@ -27,6 +27,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)showAllStudent:(id)sender {
     NSString* filePath = [[NSBundle mainBundle] pathForResource:@"persons" ofType:@"txt"];
     NSLog(@"%@",filePath);
@@ -44,14 +45,16 @@
         NSNumber* number = [dic valueForKey:@"number"];
         NSString* sex = [dic valueForKey:@"sex"];
         NSNumber* team = [dic valueForKey:@"team"];
-        person = [[[name stringByAppendingString:[number stringValue]] stringByAppendingString:sex] stringByAppendingString:[team stringValue]];
-        msg = [[msg stringByAppendingString:person] stringByAppendingString:@"\n"];
+        person = [NSString stringWithFormat:@"%@ %@ %@ %@\n",name, [number stringValue], sex, [team stringValue]];
+        msg = [msg stringByAppendingString:person];
     }
     
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"학생정보" message:msg preferredStyle:nil];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"학생정보" message:msg
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:nil];
     
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
