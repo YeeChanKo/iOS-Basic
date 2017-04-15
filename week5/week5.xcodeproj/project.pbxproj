@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7004BC6F1EA22CFF005585C4 /* RefreshButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7004BC6E1EA22CFF005585C4 /* RefreshButtonView.m */; };
+		7004BC721EA24F10005585C4 /* StaticUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7004BC711EA24F10005585C4 /* StaticUtils.m */; };
 		70D6E3261E9E2CD30029AFF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D6E3251E9E2CD30029AFF6 /* main.m */; };
 		70D6E3291E9E2CD30029AFF6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D6E3281E9E2CD30029AFF6 /* AppDelegate.m */; };
 		70D6E32C1E9E2CD30029AFF6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D6E32B1E9E2CD30029AFF6 /* ViewController.m */; };
@@ -16,10 +18,14 @@
 		70D6E3401E9E30610029AFF6 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D6E33F1E9E30610029AFF6 /* CardView.m */; };
 		70D6E3421E9E308A0029AFF6 /* card_decks in Resources */ = {isa = PBXBuildFile; fileRef = 70D6E3411E9E308A0029AFF6 /* card_decks */; };
 		70D6E3491E9E48920029AFF6 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D6E3481E9E48920029AFF6 /* refresh.png */; };
-		70D6E34C1E9E68800029AFF6 /* RefreshButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D6E34B1E9E68800029AFF6 /* RefreshButton.m */; };
+		70F04F471EA2048100AD23E4 /* CardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F04F461EA2048100AD23E4 /* CardModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7004BC6D1EA22CFF005585C4 /* RefreshButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshButtonView.h; sourceTree = "<group>"; };
+		7004BC6E1EA22CFF005585C4 /* RefreshButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshButtonView.m; sourceTree = "<group>"; };
+		7004BC701EA24F10005585C4 /* StaticUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticUtils.h; sourceTree = "<group>"; };
+		7004BC711EA24F10005585C4 /* StaticUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticUtils.m; sourceTree = "<group>"; };
 		70D6E3211E9E2CD30029AFF6 /* week5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = week5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D6E3251E9E2CD30029AFF6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		70D6E3271E9E2CD30029AFF6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -34,8 +40,8 @@
 		70D6E33F1E9E30610029AFF6 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardView.m; path = ../CardView.m; sourceTree = "<group>"; };
 		70D6E3411E9E308A0029AFF6 /* card_decks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = card_decks; sourceTree = "<group>"; };
 		70D6E3481E9E48920029AFF6 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
-		70D6E34A1E9E68800029AFF6 /* RefreshButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshButton.h; sourceTree = "<group>"; };
-		70D6E34B1E9E68800029AFF6 /* RefreshButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshButton.m; sourceTree = "<group>"; };
+		70F04F451EA2048100AD23E4 /* CardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardModel.h; sourceTree = "<group>"; };
+		70F04F461EA2048100AD23E4 /* CardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,12 +78,16 @@
 				70D6E3481E9E48920029AFF6 /* refresh.png */,
 				70D6E33E1E9E30610029AFF6 /* CardView.h */,
 				70D6E33F1E9E30610029AFF6 /* CardView.m */,
-				70D6E34A1E9E68800029AFF6 /* RefreshButton.h */,
-				70D6E34B1E9E68800029AFF6 /* RefreshButton.m */,
+				70F04F451EA2048100AD23E4 /* CardModel.h */,
+				70F04F461EA2048100AD23E4 /* CardModel.m */,
+				7004BC6D1EA22CFF005585C4 /* RefreshButtonView.h */,
+				7004BC6E1EA22CFF005585C4 /* RefreshButtonView.m */,
 				70D6E3271E9E2CD30029AFF6 /* AppDelegate.h */,
 				70D6E3281E9E2CD30029AFF6 /* AppDelegate.m */,
 				70D6E32A1E9E2CD30029AFF6 /* ViewController.h */,
 				70D6E32B1E9E2CD30029AFF6 /* ViewController.m */,
+				7004BC701EA24F10005585C4 /* StaticUtils.h */,
+				7004BC711EA24F10005585C4 /* StaticUtils.m */,
 				70D6E32D1E9E2CD30029AFF6 /* Main.storyboard */,
 				70D6E3301E9E2CD30029AFF6 /* Assets.xcassets */,
 				70D6E3321E9E2CD30029AFF6 /* LaunchScreen.storyboard */,
@@ -168,8 +178,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70D6E34C1E9E68800029AFF6 /* RefreshButton.m in Sources */,
+				7004BC6F1EA22CFF005585C4 /* RefreshButtonView.m in Sources */,
 				70D6E32C1E9E2CD30029AFF6 /* ViewController.m in Sources */,
+				7004BC721EA24F10005585C4 /* StaticUtils.m in Sources */,
+				70F04F471EA2048100AD23E4 /* CardModel.m in Sources */,
 				70D6E3291E9E2CD30029AFF6 /* AppDelegate.m in Sources */,
 				70D6E3401E9E30610029AFF6 /* CardView.m in Sources */,
 				70D6E3261E9E2CD30029AFF6 /* main.m in Sources */,
@@ -207,6 +219,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -255,6 +268,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -329,6 +343,7 @@
 				70D6E33A1E9E2CD30029AFF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

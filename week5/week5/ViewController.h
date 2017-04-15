@@ -10,6 +10,10 @@
 
 @interface ViewController : UIViewController
 
+@property int deviceMaxX;
+@property int deviceMaxY;
+
+-(void)refreshButtonTouched;
 
 @end
 

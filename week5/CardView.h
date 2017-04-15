@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CardView : UIView<CAAnimationDelegate>
+#define CARD_WIDTH 130
+#define CARD_HEIGHT 150
+#define PADDING_LEFT 26
+#define PADDING_TOP_STACK 100
+#define PADDING_TOP_BOTTOM 500
+#define CARD_SPACING_WIDTH_STACK 10
+#define CARD_SPACING_WIDTH_BOTTOM 24
+#define CARD_SPACING_HEIGHT_STACK 40
+
+@interface CardView : UIView
+
+@property(readonly)NSMutableDictionary *cardImages;
+
+-(void)initializeCardDeckReference:(NSMutableArray*)cardDeck;
 
 @end
