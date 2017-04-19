@@ -11,4 +11,6 @@ iOS Basic 문제해결 저장소
 
 * week5 - 4/12 23:49 (리프레시 애니메이션 구현함ㅎㅎ key값 관리하는 애 떼어내기 - mrc , solitaire 카드판 구현)
 
-* week6 - 
+* week6 - 4/19 20:44 (수업 시간 안에 끝내서 뿌듯 - NSNotificationCenter와 Key Value Observer 써봄)
+
+* week7
