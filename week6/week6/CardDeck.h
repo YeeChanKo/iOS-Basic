@@ -11,6 +11,7 @@
 @interface CardDeck : NSObject
 
 @property NSMutableArray* cardDeck;
+@property NSMutableArray *randomCards;
 
 -(void)randomize;
 

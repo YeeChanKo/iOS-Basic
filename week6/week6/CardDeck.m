@@ -22,14 +22,15 @@
         card3 = [CardDeck randomCardIndexNum];
     } while (card3 == card1 || card3 == card2);
     
-    
     NSString *cardName1 = [_cardDeck objectAtIndex:card1];
     NSString *cardName2 = [_cardDeck objectAtIndex:card2];
     NSString *cardName3 = [_cardDeck objectAtIndex:card3];
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:cardName1, cardName2, cardName3, nil] forKeys:[NSArray arrayWithObjects:@"1",@"2",@"3", nil]];
+    // setter 형식으로 불러야 observer가 콜이 된다
+    self.randomCards = [[NSMutableArray alloc] initWithObjects:cardName1, cardName2, cardName3, nil];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"randomized" object:nil userInfo:dic];
+//    NSDictionary *dic = [NSDictionary dictionaryWithObjects:randomCards forKeys:[NSArray arrayWithObjects:@"1",@"2",@"3", nil]];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"randomized" object:nil userInfo:dic];
 }
 
 +(int)randomCardIndexNum

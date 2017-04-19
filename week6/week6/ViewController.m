@@ -33,8 +33,29 @@
     
     cardDeck.cardDeck = [[NSMutableArray alloc] initWithArray:[cardView.cardImages allKeys]];
     
-    NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
-    [notiCenter addObserver:self selector:@selector(displayRandomCards:) name:@"randomized" object:nil];
+    [cardDeck addObserver:self
+               forKeyPath:@"randomCards"
+                  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                  context:NULL];
+    
+    //    NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
+    //    [notiCenter addObserver:self selector:@selector(displayRandomCards:) name:@"randomized" object:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    if ([keyPath isEqual:@"randomCards"]) {
+        // object가 observer가 바인딩되었던 객체
+        NSMutableArray* randomCards = ((CardDeck*)object).randomCards;
+        
+        for(int i = 0; i < [randomCards count]; i++){
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:[self makeRectOfCardWithNum:i]];
+            imgView.image = [cardView.cardImages objectForKey:randomCards[i]];
+            [self.view addSubview:imgView];
+        }
+    }
 }
 
 
