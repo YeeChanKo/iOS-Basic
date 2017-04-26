@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CardView.h"
+#import "CardDeck.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property CardView *cardView;
+@property CardDeck *cardDeck;
 
 @end
 

@@ -325,6 +325,7 @@
 				700570F51EA7683900AD939E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

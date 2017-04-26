@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "CardView.h"
 #import "CardDeck.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,13 @@
 @implementation ViewController {
     CardView *cardView;
     CardDeck *cardDeck;
+}
+
+-(void)initCardViewAndCardDeck{
+    cardView = [[CardView alloc] init];
+    cardDeck = [[CardDeck alloc] init];
+    
+    cardDeck.cardDeck = [[NSMutableArray alloc] initWithArray:[cardView.cardImages allKeys]];
 }
 
 -(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
@@ -28,10 +36,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    cardView = [[CardView alloc] init];
-    cardDeck = [[CardDeck alloc] init];
+    [self initCardViewAndCardDeck];
     
-    cardDeck.cardDeck = [[NSMutableArray alloc] initWithArray:[cardView.cardImages allKeys]];
+    // save reference to appDelegate
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.cardView = cardView;
+    appDelegate.cardDeck = cardDeck;
     
     [cardDeck addObserver:self
                forKeyPath:@"randomCards"
@@ -48,16 +58,21 @@
                        context:(void *)context {
     if ([keyPath isEqual:@"randomCards"]) {
         // object가 observer가 바인딩되었던 객체
-        NSMutableArray* randomCards = ((CardDeck*)object).randomCards;
+        // NSMutableArray* randomCards = ((CardDeck*)object).randomCards;
         
-        for(int i = 0; i < [randomCards count]; i++){
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:[self makeRectOfCardWithNum:i]];
-            imgView.image = [cardView.cardImages objectForKey:randomCards[i]];
-            [self.view addSubview:imgView];
-        }
+        [self displayRandomCards];
     }
 }
 
+-(void)displayRandomCards {
+    NSMutableArray *randomCards = cardDeck.randomCards;
+    
+    for(int i = 0; i < [randomCards count]; i++){
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:[self makeRectOfCardWithNum:i]];
+        imgView.image = [cardView.cardImages objectForKey:randomCards[i]];
+        [self.view addSubview:imgView];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -68,19 +83,19 @@
     [cardDeck randomize];
 }
 
--(void)displayRandomCards:(NSNotification*)noti {
-    NSDictionary *dic = [noti userInfo];
-    NSLog(@"%@", dic);
-    
-    for (NSString* key in dic) {
-        NSString *value = [dic objectForKey:key];
-        
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:[self makeRectOfCardWithNum:[key intValue]]];
-        
-        imgView.image = [cardView.cardImages objectForKey:value];
-        [self.view addSubview:imgView];
-    }
-}
+//-(void)displayRandomCardsWithNoti:(NSNotification*)noti {
+//    NSDictionary *dic = [noti userInfo];
+//    NSLog(@"%@", dic);
+//
+//    for (NSString* key in dic) {
+//        NSString *value = [dic objectForKey:key];
+//
+//        UIImageView *imgView = [[UIImageView alloc] initWithFrame:[self makeRectOfCardWithNum:[key intValue]]];
+//
+//        imgView.image = [cardView.cardImages objectForKey:value];
+//        [self.view addSubview:imgView];
+//    }
+//}
 
 -(CGRect)makeRectOfCardWithNum:(int)num {
     return CGRectMake(150+150*num, 300, CARD_WIDTH, CARD_HEIGHT);
