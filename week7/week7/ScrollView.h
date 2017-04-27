@@ -14,6 +14,8 @@
 @property NSMutableArray *imageArr;
 
 - (instancetype)initWithViewController:(ViewController*)viewController;
+-(BOOL)checkIfImageViewExistsAtIndex:(int)x;
 -(void)addImageViewAtIndex:(int)x;
+-(void)removeImageViewAtIndex:(int)x;
 
 @end
