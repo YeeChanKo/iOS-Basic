@@ -16,6 +16,7 @@
 
 @implementation AlbumViewController{
     DataModel *dataModel;
+    NSMutableDictionary *sectionRowInfo;
 }
 
 - (void)viewDidLoad {
@@ -26,6 +27,10 @@
     [notiCenter addObserver:self selector:@selector(dataModelDidChange) name:@"DATA_MODEL_CHANGED" object:nil];
     
     dataModel = [[DataModel alloc] init];
+    
+    sectionRowInfo = [[NSMutableDictionary alloc] init];
+    [sectionRowInfo setObject:@(1).stringValue forKey:@"sectionCount"];
+    [sectionRowInfo setObject:@([dataModel.imageInfo count]).stringValue forKey:@"0"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,14 +40,16 @@
 
 -(void)dataModelDidChange{
     [self.tableView reloadData];
+    
+    // section 정보 sectionrowinfo 에 넣어주기
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	   return 1;
+	   return [[sectionRowInfo objectForKey:@"sectionCount"] integerValue];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [dataModel.imageInfo count];
+    return [[sectionRowInfo objectForKey:@(section).stringValue] integerValue];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -84,6 +91,8 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    
+    
     return @"test yo";
 }
 
