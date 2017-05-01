@@ -38,18 +38,18 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	   return [dataModel.imageInfo count];
+	   return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [dataModel.imageInfo count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CustomTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CUSTOM_CELL" forIndexPath:indexPath];
     
-    NSDictionary *info = [dataModel.imageInfo objectAtIndex:indexPath.section];
+    NSDictionary *info = [dataModel.imageInfo objectAtIndex:indexPath.row];
     
     cell.nameLabel.text = [info objectForKey:@"title"];
     cell.dateLabel.text = [info objectForKey:@"date"];
@@ -68,7 +68,7 @@
     if([segue.identifier  isEqual: @"SHOW_PHOTO"]) {
         
         PhotoViewController *vc = [segue destinationViewController];
-        NSDictionary *info = [dataModel.imageInfo objectAtIndex:[self.tableView indexPathForSelectedRow].section];
+        NSDictionary *info = [dataModel.imageInfo objectAtIndex:[self.tableView indexPathForSelectedRow].row];
         [vc prepareData:info];
     }
 }
@@ -81,6 +81,10 @@
     if ( event.subtype == UIEventSubtypeMotionShake ){
         [dataModel setInitialData];
     }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return @"test yo";
 }
 
 @end
