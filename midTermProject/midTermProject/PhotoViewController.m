@@ -12,22 +12,31 @@
 
 @end
 
-@implementation PhotoViewController
+@implementation PhotoViewController{
+    NSString *name;
+    NSString *date;
+    NSString *imagePath;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _nameLabel.text = _name;
-    _dateLabel.text = _date;
-    
-    _imageView.image = [UIImage imageNamed: _image];
+    _nameLabel.text = name;
+    _dateLabel.text = date;
+    _imageView.image = [UIImage imageNamed: imagePath];
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)prepareData:(NSDictionary*)data{
+    name = [data objectForKey:@"title"];
+    date = [data objectForKey:@"date"];
+    imagePath = [NSString stringWithFormat:@"images/%@", [data objectForKey:@"image"]];
 }
 
 /*

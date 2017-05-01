@@ -23,7 +23,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
-    [notiCenter addObserver:self selector:@selector(dataModelDidInitWith:) name:@"DATA_MODEL" object:nil];
+    [notiCenter addObserver:self selector:@selector(dataModelDidChange) name:@"DATA_MODEL_CHANGED" object:nil];
     
     dataModel = [[DataModel alloc] init];
 }
@@ -33,7 +33,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)dataModelDidInitWith:(NSNotification*)noti {
+-(void)dataModelDidChange{
     [self.tableView reloadData];
 }
 
@@ -53,11 +53,12 @@
     
     cell.nameLabel.text = [info objectForKey:@"title"];
     cell.dateLabel.text = [info objectForKey:@"date"];
+    cell.dateLabel.textColor = [UIColor greenColor];
     
     NSString* imgPath = [NSString stringWithFormat:@"images/%@", [info objectForKey:@"image"]];
     UIImage *image = [UIImage imageNamed: imgPath];
     UIImageView* imgView = [[UIImageView alloc] initWithImage:image];
-    imgView.contentMode = UIViewContentModeScaleAspectFill;
+    imgView.contentMode = UIViewContentModeCenter;
     cell.backgroundView = imgView;
                             
     return cell;
@@ -67,13 +68,19 @@
     if([segue.identifier  isEqual: @"SHOW_PHOTO"]) {
         
         PhotoViewController *vc = [segue destinationViewController];
-    
         NSDictionary *info = [dataModel.imageInfo objectAtIndex:[self.tableView indexPathForSelectedRow].section];
-        
-        vc.name = [info objectForKey:@"title"];
-        vc.date = [info objectForKey:@"date"];
-        NSString* imgPath = [NSString stringWithFormat:@"images/%@", [info objectForKey:@"image"]];
-        vc.image = imgPath;
+        [vc prepareData:info];
     }
 }
+
+- (IBAction)rightBarButtonTouched:(id)sender {
+    [dataModel sortByDate];
+}
+
+-(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    if ( event.subtype == UIEventSubtypeMotionShake ){
+        [dataModel setInitialData];
+    }
+}
+
 @end

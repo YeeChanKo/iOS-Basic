@@ -104,7 +104,13 @@
                             <outlet property="delegate" destination="D8x-ab-clf" id="4EX-0O-bH2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Album" id="fHO-GN-LaD"/>
+                    <navigationItem key="navigationItem" title="Album" id="fHO-GN-LaD">
+                        <barButtonItem key="rightBarButtonItem" title="Sort By Date" id="JVR-kq-jSP">
+                            <connections>
+                                <action selector="rightBarButtonTouched:" destination="D8x-ab-clf" id="Unz-aC-6yg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ixp-yp-ouN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

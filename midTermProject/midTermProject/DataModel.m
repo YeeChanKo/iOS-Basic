@@ -15,6 +15,13 @@
     self = [super init];
     if (!self) return nil;
     
+    [self setInitialData];
+    [self sortByTitle];
+    
+    return self;
+}
+
+-(void)setInitialData{
     char *data = "[{\"title\":\"초록\",\"image\":\"01.jpg\",\"date\":\"20150116\"},\
     {\"title\":\"장미\",\"image\":\"02.jpg\",\"date\":\"20160505\"},\
     {\"title\":\"낙엽\",\"image\":\"03.jpg\",\"date\":\"20141212\"},\
@@ -27,26 +34,33 @@
     {\"title\":\"나비\",\"image\":\"10.jpg\",\"date\":\"20141225\"}]";
     
     NSData* jsonData = [NSData dataWithBytes:data length:strlen(data)];
-    NSMutableArray *jsonArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+    _imageInfo = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
     
-    _imageInfo = [[NSMutableArray alloc] initWithArray:
-    [jsonArr sortedArrayUsingComparator:^(NSDictionary *obj1, NSDictionary *obj2) {
-        NSString* title1 = [obj1 objectForKey:@"title"];
-        NSString* title2 = [obj2 objectForKey:@"title"];
-        return [title1 compare:title2];
-    }]];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DATA_MODEL" object:nil];
-    
-    return self;
+    [self postNotification];
 }
 
--(NSString*)getTitleFromIndex:(NSInteger)index{
+-(NSArray*)sort:(NSArray*)arr ByItem:(NSString*)item{
+    NSArray* result = [arr sortedArrayUsingComparator:^(NSDictionary *obj1, NSDictionary *obj2) {
+        NSString* s1 = [obj1 objectForKey:item];
+        NSString* s2 = [obj2 objectForKey:item];
+        return [s1 compare:s2];
+    }];
     
-    NSString *title =[[_imageInfo objectAtIndex:index] objectForKey:@"title"];
-    return title;
+    [self postNotification];
+    return result;
 }
 
+-(void)postNotification{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DATA_MODEL_CHANGED" object:nil];
+}
+
+-(void)sortByTitle{
+    _imageInfo = [self sort:_imageInfo ByItem:@"title"];
+}
+
+-(void)sortByDate{
+    _imageInfo = [self sort:_imageInfo ByItem:@"date"];
+}
 
 
 @end

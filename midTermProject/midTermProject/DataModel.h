@@ -10,8 +10,11 @@
 
 @interface DataModel : NSObject
 
-@property NSMutableArray *imageInfo;
+@property NSArray *imageInfo;
 
 - (instancetype)init;
+-(void)setInitialData;
+-(void)sortByTitle;
+-(void)sortByDate;
 
 @end

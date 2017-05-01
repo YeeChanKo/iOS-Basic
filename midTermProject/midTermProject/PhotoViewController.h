@@ -10,12 +10,10 @@
 
 @interface PhotoViewController : UIViewController
 
-@property NSString *name;
-@property NSString *date;
-@property NSString *image;
-
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+-(void)prepareData:(NSDictionary*)data;
 
 @end
