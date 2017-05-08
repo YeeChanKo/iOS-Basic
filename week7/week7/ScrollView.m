@@ -56,8 +56,8 @@
 
 -(void)addImageViewAtIndex:(int)x{
     NSArray *arr = [_imageArr objectAtIndex:x];
-    UIImage *img = [UIImage imageNamed:
-                    [NSString stringWithFormat:@"images/%@",[arr objectAtIndex:0]]];
+    NSString* imageName = [NSString stringWithFormat:@"images/%@",[arr objectAtIndex:0]];
+    UIImage *img = [self createUIImage:imageName];
     
     CGFloat topY = [[arr objectAtIndex:1] floatValue];
     CGFloat bottomY = [[arr objectAtIndex:2] floatValue];
@@ -71,6 +71,14 @@
     
     
     NSLog(@"img added at %d!",x);
+}
+
+-(UIImage*)createUIImage:(NSString*)imageName{
+    NSString *nameWithoutExtension = [imageName stringByDeletingPathExtension];
+    NSString *extension = [imageName pathExtension];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:nameWithoutExtension ofType:extension];
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+    return image;
 }
 
 -(void)removeImageViewAtIndex:(int)x{
