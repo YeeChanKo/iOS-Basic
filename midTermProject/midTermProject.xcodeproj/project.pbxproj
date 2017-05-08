@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		708D59751EC088CF00B71FAD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 708D59741EC088CF00B71FAD /* Reachability.m */; };
 		70FFB0B31EB7381600FA053A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FFB0B21EB7381600FA053A /* main.m */; };
 		70FFB0B61EB7381600FA053A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FFB0B51EB7381600FA053A /* AppDelegate.m */; };
 		70FFB0B91EB7381600FA053A /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FFB0B81EB7381600FA053A /* AlbumViewController.m */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		708D59731EC088CF00B71FAD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		708D59741EC088CF00B71FAD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		70FFB0AE1EB7381600FA053A /* midTermProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = midTermProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70FFB0B21EB7381600FA053A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		70FFB0B41EB7381600FA053A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -74,6 +77,8 @@
 				70FFB0B51EB7381600FA053A /* AppDelegate.m */,
 				70FFB0CA1EB7448D00FA053A /* DataModel.h */,
 				70FFB0CB1EB7448D00FA053A /* DataModel.m */,
+				708D59731EC088CF00B71FAD /* Reachability.h */,
+				708D59741EC088CF00B71FAD /* Reachability.m */,
 				70FFB0B71EB7381600FA053A /* AlbumViewController.h */,
 				70FFB0B81EB7381600FA053A /* AlbumViewController.m */,
 				70FFB0BA1EB7381600FA053A /* Main.storyboard */,
@@ -173,6 +178,7 @@
 				70FFB0B91EB7381600FA053A /* AlbumViewController.m in Sources */,
 				70FFB0CC1EB7448D00FA053A /* DataModel.m in Sources */,
 				70FFB0B61EB7381600FA053A /* AppDelegate.m in Sources */,
+				708D59751EC088CF00B71FAD /* Reachability.m in Sources */,
 				70FFB0D51EB75F2B00FA053A /* PhotoViewController.m in Sources */,
 				70FFB0CF1EB74F1900FA053A /* CustomTableViewCell.m in Sources */,
 				70FFB0B31EB7381600FA053A /* main.m in Sources */,
@@ -332,6 +338,7 @@
 				70FFB0C71EB7381600FA053A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

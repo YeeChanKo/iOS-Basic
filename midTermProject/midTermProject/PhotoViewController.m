@@ -24,7 +24,7 @@
     
     _nameLabel.text = name;
     _dateLabel.text = date;
-    _imageView.image = [UIImage imageNamed: imagePath];
+    _imageView.image = [UIImage imageWithContentsOfFile:imagePath];
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
@@ -36,7 +36,7 @@
 -(void)prepareData:(NSDictionary*)data{
     name = [data objectForKey:@"title"];
     date = [data objectForKey:@"date"];
-    imagePath = [NSString stringWithFormat:@"images/%@", [data objectForKey:@"image"]];
+    imagePath = [data objectForKey:@"image"];
 }
 
 /*

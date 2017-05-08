@@ -17,6 +17,7 @@
 @implementation AlbumViewController{
     DataModel *dataModel;
     NSMutableDictionary *sectionRowInfo;
+    NSMutableDictionary *indexMapper;
 }
 
 - (void)viewDidLoad {
@@ -27,10 +28,11 @@
     [notiCenter addObserver:self selector:@selector(dataModelDidChange) name:@"DATA_MODEL_CHANGED" object:nil];
     
     dataModel = [[DataModel alloc] init];
-    
     sectionRowInfo = [[NSMutableDictionary alloc] init];
-    [sectionRowInfo setObject:@(1).stringValue forKey:@"sectionCount"];
-    [sectionRowInfo setObject:@([dataModel.imageInfo count]).stringValue forKey:@"0"];
+    [sectionRowInfo setObject:@1 forKey:@"sectionCount"];
+    //([dataModel.imageInfo count])
+    [sectionRowInfo setObject:@50 forKey:@"0"];
+    indexMapper = [[NSMutableDictionary alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,7 +43,16 @@
 -(void)dataModelDidChange{
     [self.tableView reloadData];
     
-    // section 정보 sectionrowinfo 에 넣어주기
+    // TODO: section 정보 sectionrowinfo 에 넣어주기
+//    [dataModel.imageInfo enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        NSDictionary *dic = obj;
+//        
+//        NSString *date = [dic objectForKey:@"date"];
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        [formatter setDateFormat:@"yyyyMMdd"];
+//        NSDate *nsDate = [formatter dateFromString:date];
+//        NSInteger year = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:nsDate];
+//    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -62,9 +73,10 @@
     cell.dateLabel.text = [info objectForKey:@"date"];
     cell.dateLabel.textColor = [UIColor greenColor];
     
-    NSString* imgPath = [NSString stringWithFormat:@"images/%@", [info objectForKey:@"image"]];
-    UIImage *image = [UIImage imageNamed: imgPath];
-    UIImageView* imgView = [[UIImageView alloc] initWithImage:image];
+    NSString *imgName = [info objectForKey:@"image"];
+    UIImage *img = [dataModel createUIImageWithName:imgName];
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
     imgView.contentMode = UIViewContentModeCenter;
     cell.backgroundView = imgView;
                             
@@ -75,7 +87,9 @@
     if([segue.identifier  isEqual: @"SHOW_PHOTO"]) {
         
         PhotoViewController *vc = [segue destinationViewController];
-        NSDictionary *info = [dataModel.imageInfo objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        NSMutableDictionary *info = [[dataModel.imageInfo objectAtIndex:[self.tableView indexPathForSelectedRow].row] mutableCopy];
+        NSString *imgName = [info objectForKey:@"image"];
+        [info setObject:[NSString stringWithFormat:@"%@/%@",dataModel.cacheDir,imgName] forKey:@"image"];
         [vc prepareData:info];
     }
 }
