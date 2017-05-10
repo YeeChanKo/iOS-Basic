@@ -11,6 +11,13 @@
 
 @interface DataModel : NSObject
 
+typedef enum {
+    UNSORTED,
+    SORT_BY_TITLE,
+    SORT_BY_DATE
+} STATUS;
+
+@property STATUS status;
 @property NSArray *imageInfo;
 @property NSString *cacheDir;
 

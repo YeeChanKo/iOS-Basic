@@ -24,16 +24,14 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     _cacheDir = [paths objectAtIndex:0]; // 마지막에 / 없음
     
-    if([self testReachability]){
-        [self setInitialDataWithNetwork];
-    }
-    else{
+//    if([self testReachability]){
+//        [self setInitialDataWithNetwork];
+//    }
+//    else{
         [self setInitialData];
-    }
+//    }
     
-    [self sortByTitle];
-    
-    return self;
+    return self; // 이것보다 post noti 가 먼저 일어나면 안됨
 }
 
 -(void)setInitialData{
@@ -51,7 +49,8 @@
     NSData* jsonData = [NSData dataWithBytes:data length:strlen(data)];
     _imageInfo = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
     
-    [self postNotification];
+    self.status = UNSORTED;
+    [self postNotificationWithName:@"DATA_MODEL_CHANGED"];
 }
 
 -(void)setInitialDataWithNetwork{
@@ -59,10 +58,11 @@
     [[session dataTaskWithURL:url completionHandler:
       ^(NSData *data, NSURLResponse *response, NSError *error) {
           _imageInfo = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-          // NSLog(@"%@", _imageInfo);
-          [self postNotification];
           [self downloadImageData];
       }] resume];
+    
+    self.status = UNSORTED;
+    [self postNotificationWithName:@"DATA_MODEL_CHANGED"];
 }
 
 -(void)downloadImageData{
@@ -75,41 +75,42 @@
             [fileManager moveItemAtPath:[location path] toPath:[NSString stringWithFormat:@"%@/%@", _cacheDir, filename] error:nil];
         }] resume];
     }];
-    [self postNotification];
+    [self postNotificationWithName:@"DATA_MODEL_CHANGED"];
 }
 
 -(UIImage*)createUIImageWithName:(NSString*)imageName{
 //    if([self testReachability]){
-        NSString *filePath = [NSString stringWithFormat:@"%@/%@", _cacheDir, imageName];
-        return [UIImage imageWithContentsOfFile:filePath];
+//        NSString *filePath = [NSString stringWithFormat:@"%@/%@", _cacheDir, imageName];
+//        return [UIImage imageWithContentsOfFile:filePath];
 //    }else{
 //        // 기존 번들에서 가져오기
-//        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"images/%@", imageName] ofType:nil];
-//        return [UIImage imageWithContentsOfFile:filePath];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"images/%@", imageName] ofType:nil];
+        return [UIImage imageWithContentsOfFile:filePath];
 //    }
 }
 
--(NSArray*)sort:(NSArray*)arr ByItem:(NSString*)item{
-    NSArray* result = [arr sortedArrayUsingComparator:^(NSDictionary *obj1, NSDictionary *obj2) {
+-(void)sort:(NSArray*)arr ByItem:(NSString*)item{
+    _imageInfo = [arr sortedArrayUsingComparator:^(NSDictionary *obj1, NSDictionary *obj2) {
         NSString* s1 = [obj1 objectForKey:item];
         NSString* s2 = [obj2 objectForKey:item];
         return [s1 compare:s2];
     }];
-    
-    [self postNotification];
-    return result;
 }
 
--(void)postNotification{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DATA_MODEL_CHANGED" object:nil];
+-(void)postNotificationWithName:(NSString*)name{
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil];
 }
 
 -(void)sortByTitle{
-    _imageInfo = [self sort:_imageInfo ByItem:@"title"];
+    [self sort:_imageInfo ByItem:@"title"];
+    self.status = SORT_BY_TITLE;
+    [self postNotificationWithName:@"DATA_MODEL_CHANGED"];
 }
 
 -(void)sortByDate{
-    _imageInfo = [self sort:_imageInfo ByItem:@"date"];
+    [self sort:_imageInfo ByItem:@"date"];
+    self.status = SORT_BY_DATE;
+    [self postNotificationWithName:@"DATA_MODEL_CHANGED"];
 }
 
 -(BOOL)testReachability{

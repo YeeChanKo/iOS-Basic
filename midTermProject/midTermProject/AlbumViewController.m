@@ -10,14 +10,15 @@
 #import "DataModel.h"
 #import "CustomTableViewCell.h"
 #import "PhotoViewController.h"
+#import "SectionRowInfo.h"
 
 @interface AlbumViewController ()
 @end
 
 @implementation AlbumViewController{
     DataModel *dataModel;
-    NSMutableDictionary *sectionRowInfo;
-    NSMutableDictionary *indexMapper;
+    SectionRowInfo *sectionRowInfo;
+    STATUS lastStatus;
 }
 
 - (void)viewDidLoad {
@@ -28,11 +29,11 @@
     [notiCenter addObserver:self selector:@selector(dataModelDidChange) name:@"DATA_MODEL_CHANGED" object:nil];
     
     dataModel = [[DataModel alloc] init];
-    sectionRowInfo = [[NSMutableDictionary alloc] init];
-    [sectionRowInfo setObject:@1 forKey:@"sectionCount"];
-    //([dataModel.imageInfo count])
-    [sectionRowInfo setObject:@50 forKey:@"0"];
-    indexMapper = [[NSMutableDictionary alloc] init];
+    [dataModel sortByTitle];
+    
+    // setting default sectionRowInfo
+    sectionRowInfo = [[SectionRowInfo alloc] init];
+    [self initSectionRowInfoForDefault];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,33 +42,67 @@
 }
 
 -(void)dataModelDidChange{
-    [self.tableView reloadData];
+    if(dataModel.status == lastStatus){
+        [self.tableView reloadData];
+        return;
+    }
     
-    // TODO: section 정보 sectionrowinfo 에 넣어주기
-//    [dataModel.imageInfo enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//        NSDictionary *dic = obj;
-//        
-//        NSString *date = [dic objectForKey:@"date"];
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        [formatter setDateFormat:@"yyyyMMdd"];
-//        NSDate *nsDate = [formatter dateFromString:date];
-//        NSInteger year = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:nsDate];
-//    }];
+    switch (dataModel.status) {
+        case UNSORTED:
+        case SORT_BY_TITLE:
+            [self initSectionRowInfoForDefault];
+            break;
+        case SORT_BY_DATE:
+            [self initSectionRowInfoForSortByDate];
+            break;
+    }
+    
+    [self.tableView reloadData];
+    lastStatus = dataModel.status;
+}
+
+-(void)initSectionRowInfoForDefault{
+    [sectionRowInfo setDefaultRowPerSectionAndIndexMappingWithRowCount:[dataModel.imageInfo count]];
+}
+
+-(void)initSectionRowInfoForSortByDate{
+    [sectionRowInfo resetSectionRowInfo];
+    __block int section = -1; // to make initial value as 0
+    __block int row;
+    __block NSString *yearStr = @"";
+    [dataModel.imageInfo enumerateObjectsUsingBlock:^(NSDictionary* dic, NSUInteger idx, BOOL *stop) {
+        NSString *date = [dic objectForKey:@"date"];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyyMMdd"];
+        NSDate *nsDate = [formatter dateFromString:date];
+        NSInteger year = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:nsDate];
+        
+        if(![yearStr isEqualToString:@(year).stringValue]){
+            yearStr = @(year).stringValue;
+            section++;
+            row = 0;
+            [sectionRowInfo setText:yearStr OfSection:@(section).stringValue];
+        }
+        
+        [sectionRowInfo mapIndex:idx toIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
+        [sectionRowInfo incrementRowInSection:@(section).stringValue];
+        row++;
+    }];
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	   return [[sectionRowInfo objectForKey:@"sectionCount"] integerValue];
+    return [sectionRowInfo getCountOfSections];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[sectionRowInfo objectForKey:@(section).stringValue] integerValue];
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+    return [sectionRowInfo getCountOfRowsInSection:section];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+-(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
     CustomTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CUSTOM_CELL" forIndexPath:indexPath];
-    
-    NSDictionary *info = [dataModel.imageInfo objectAtIndex:indexPath.row];
+    NSUInteger index = [sectionRowInfo getIndexForIndexPath:indexPath];
+    NSDictionary *info = [dataModel.imageInfo objectAtIndex:index];
     
     cell.nameLabel.text = [info objectForKey:@"title"];
     cell.dateLabel.text = [info objectForKey:@"date"];
@@ -79,17 +114,19 @@
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
     imgView.contentMode = UIViewContentModeCenter;
     cell.backgroundView = imgView;
-                            
+    
     return cell;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier  isEqual: @"SHOW_PHOTO"]) {
-        
+    if([segue.identifier isEqual: @"SHOW_PHOTO"]) {
         PhotoViewController *vc = [segue destinationViewController];
-        NSMutableDictionary *info = [[dataModel.imageInfo objectAtIndex:[self.tableView indexPathForSelectedRow].row] mutableCopy];
+        NSUInteger index = [sectionRowInfo getIndexForIndexPath:[self.tableView indexPathForSelectedRow]];
+        NSMutableDictionary *info = [[dataModel.imageInfo objectAtIndex:index] mutableCopy];
         NSString *imgName = [info objectForKey:@"image"];
-        [info setObject:[NSString stringWithFormat:@"%@/%@",dataModel.cacheDir,imgName] forKey:@"image"];
+        [info setObject:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"images/%@",imgName] ofType:nil]
+                 forKey:@"image"];
+        // [info setObject:[NSString stringWithFormat:@"%@/%@",dataModel.cacheDir,imgName] forKey:@"image"];
         [vc prepareData:info];
     }
 }
@@ -105,9 +142,13 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    
-    
-    return @"test yo";
+    switch (dataModel.status) {
+        case UNSORTED:
+        case SORT_BY_TITLE:
+            return nil;
+        case SORT_BY_DATE:
+            return [sectionRowInfo getTextOfsection:@(section).stringValue];
+    }
 }
 
 @end

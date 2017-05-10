@@ -10,6 +10,5 @@
 
 @interface AlbumViewController : UITableViewController
 
-
 @end
 
