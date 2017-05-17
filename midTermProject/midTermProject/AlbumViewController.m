@@ -29,11 +29,10 @@
     [notiCenter addObserver:self selector:@selector(dataModelDidChange) name:@"DATA_MODEL_CHANGED" object:nil];
     
     dataModel = [[DataModel alloc] init];
-    [dataModel sortByTitle];
+//    [dataModel sortByTitle];
     
     // setting default sectionRowInfo
     sectionRowInfo = [[SectionRowInfo alloc] init];
-    [self initSectionRowInfoForDefault];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,10 +41,12 @@
 }
 
 -(void)dataModelDidChange{
+    NSLog(@"called");
     if(dataModel.status == lastStatus){
         [self.tableView reloadData];
         return;
     }
+    NSLog(@"called2");
     
     switch (dataModel.status) {
         case UNSORTED:
@@ -62,6 +63,7 @@
 }
 
 -(void)initSectionRowInfoForDefault{
+    NSLog(@"%lu", [dataModel.imageInfo count]);
     [sectionRowInfo setDefaultRowPerSectionAndIndexMappingWithRowCount:[dataModel.imageInfo count]];
 }
 
@@ -102,8 +104,16 @@
 -(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
     CustomTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CUSTOM_CELL" forIndexPath:indexPath];
     NSUInteger index = [sectionRowInfo getIndexForIndexPath:indexPath];
+    NSLog(@"%lu", index);
     NSDictionary *info = [dataModel.imageInfo objectAtIndex:index];
+    NSLog(@"%@", info);
     
+    [self setupCell:cell withInfo:info];
+    
+    return cell;
+}
+
+- (void)setupCell:(CustomTableViewCell*)cell withInfo:(NSDictionary*)info {
     cell.nameLabel.text = [info objectForKey:@"title"];
     cell.dateLabel.text = [info objectForKey:@"date"];
     cell.dateLabel.textColor = [UIColor greenColor];
@@ -114,8 +124,6 @@
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
     imgView.contentMode = UIViewContentModeCenter;
     cell.backgroundView = imgView;
-    
-    return cell;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -124,9 +132,9 @@
         NSUInteger index = [sectionRowInfo getIndexForIndexPath:[self.tableView indexPathForSelectedRow]];
         NSMutableDictionary *info = [[dataModel.imageInfo objectAtIndex:index] mutableCopy];
         NSString *imgName = [info objectForKey:@"image"];
-        [info setObject:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"images/%@",imgName] ofType:nil]
-                 forKey:@"image"];
-        // [info setObject:[NSString stringWithFormat:@"%@/%@",dataModel.cacheDir,imgName] forKey:@"image"];
+//        [info setObject:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"images/%@",imgName] ofType:nil]
+//                 forKey:@"image"];
+        [info setObject:[NSString stringWithFormat:@"%@/%@",dataModel.cacheDir,imgName] forKey:@"image"];
         [vc prepareData:info];
     }
 }

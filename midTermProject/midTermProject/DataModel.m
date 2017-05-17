@@ -25,10 +25,10 @@
     _cacheDir = [paths objectAtIndex:0]; // 마지막에 / 없음
     
 //    if([self testReachability]){
-//        [self setInitialDataWithNetwork];
+        [self setInitialDataWithNetwork];
 //    }
 //    else{
-        [self setInitialData];
+//        [self setInitialData];
 //    }
     
     return self; // 이것보다 post noti 가 먼저 일어나면 안됨
@@ -58,6 +58,7 @@
     [[session dataTaskWithURL:url completionHandler:
       ^(NSData *data, NSURLResponse *response, NSError *error) {
           _imageInfo = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+          NSLog(@"%@", _imageInfo);
           [self downloadImageData];
       }] resume];
     
@@ -80,12 +81,12 @@
 
 -(UIImage*)createUIImageWithName:(NSString*)imageName{
 //    if([self testReachability]){
-//        NSString *filePath = [NSString stringWithFormat:@"%@/%@", _cacheDir, imageName];
-//        return [UIImage imageWithContentsOfFile:filePath];
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@", _cacheDir, imageName];
+        return [UIImage imageWithContentsOfFile:filePath];
 //    }else{
 //        // 기존 번들에서 가져오기
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"images/%@", imageName] ofType:nil];
-        return [UIImage imageWithContentsOfFile:filePath];
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"images/%@", imageName] ofType:nil];
+//        return [UIImage imageWithContentsOfFile:filePath];
 //    }
 }
 
