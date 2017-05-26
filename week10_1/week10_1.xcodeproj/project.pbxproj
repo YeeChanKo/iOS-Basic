@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		702713F01ECC6AB1006D10D9 /* ConcurrentOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 702713EF1ECC6AB1006D10D9 /* ConcurrentOperationQueue.m */; };
+		702713F31ECC6D74006D10D9 /* BookAndWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 702713F21ECC6D74006D10D9 /* BookAndWordList.m */; };
 		706E53E91EC9C773001B677C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 706E53E81EC9C773001B677C /* main.m */; };
 		706E53EC1EC9C773001B677C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 706E53EB1EC9C773001B677C /* AppDelegate.m */; };
 		706E53EF1EC9C773001B677C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 706E53EE1EC9C773001B677C /* ViewController.m */; };
@@ -17,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		702713EE1ECC6AB1006D10D9 /* ConcurrentOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcurrentOperationQueue.h; sourceTree = "<group>"; };
+		702713EF1ECC6AB1006D10D9 /* ConcurrentOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcurrentOperationQueue.m; sourceTree = "<group>"; };
+		702713F11ECC6D74006D10D9 /* BookAndWordList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookAndWordList.h; sourceTree = "<group>"; };
+		702713F21ECC6D74006D10D9 /* BookAndWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookAndWordList.m; sourceTree = "<group>"; };
 		706E53E41EC9C773001B677C /* week10_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = week10_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		706E53E81EC9C773001B677C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		706E53EA1EC9C773001B677C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -65,6 +71,10 @@
 				706E53EB1EC9C773001B677C /* AppDelegate.m */,
 				706E53ED1EC9C773001B677C /* ViewController.h */,
 				706E53EE1EC9C773001B677C /* ViewController.m */,
+				702713EE1ECC6AB1006D10D9 /* ConcurrentOperationQueue.h */,
+				702713EF1ECC6AB1006D10D9 /* ConcurrentOperationQueue.m */,
+				702713F11ECC6D74006D10D9 /* BookAndWordList.h */,
+				702713F21ECC6D74006D10D9 /* BookAndWordList.m */,
 				706E53F01EC9C773001B677C /* Main.storyboard */,
 				706E53F31EC9C773001B677C /* Assets.xcassets */,
 				706E53F51EC9C773001B677C /* LaunchScreen.storyboard */,
@@ -154,8 +164,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				702713F01ECC6AB1006D10D9 /* ConcurrentOperationQueue.m in Sources */,
 				706E53EF1EC9C773001B677C /* ViewController.m in Sources */,
 				706E53EC1EC9C773001B677C /* AppDelegate.m in Sources */,
+				702713F31ECC6D74006D10D9 /* BookAndWordList.m in Sources */,
 				706E53E91EC9C773001B677C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,6 +325,7 @@
 				706E53FD1EC9C773001B677C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

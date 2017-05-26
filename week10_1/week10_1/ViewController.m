@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ConcurrentOperationQueue.h"
 
 @interface ViewController ()
 
@@ -17,14 +18,14 @@
 @implementation ViewController{
     NSString *bookText;
     NSMutableDictionary *countDic;
-    NSOperationQueue *queue;
+    ConcurrentOperationQueue *queue;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self setupConcurruentOperationQueueWithMaxCount:20];
+    queue = [[ConcurrentOperationQueue alloc] initWithMaxConcurrentOperationCount:20];
     countDic = [[NSMutableDictionary alloc] init];
     bookText = [self readStringFromBookText];
     [self downloadWordList];
@@ -45,6 +46,7 @@
     [[session downloadTaskWithURL:[NSURL URLWithString:@"http://125.209.194.123/wordlist.php"]] resume];
 }
 
+//datatask
 -(void)URLSession:(NSURLSession *)session
      downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location{
     
@@ -52,13 +54,12 @@
     
     [wordList enumerateObjectsUsingBlock:^(NSString *word, NSUInteger idx, BOOL *stop) {
         __weak typeof(self) weakSelf = self;
-        [weakSelf addConcurruentOperation:^{
+        [queue addConcurruentOperation:^{
             [weakSelf countWord:word inText:bookText AndAddToDic:countDic];
         }];
     }];
     
-    [self startConcurrentOperationQueue];
-    [queue waitUntilAllOperationsAreFinished];
+    [queue startConcurrentOperationQueueAndWait];
     
     NSArray *sortedKeys = [self sortedKeysOfDicByCountOnAscendingOrder:countDic];
     NSString *message = [self makeMessageFromSortedResult:countDic :sortedKeys];
@@ -66,21 +67,6 @@
     int totalCount = [self getTotalCountOfOccuredWordInDic:countDic];
     
     [self showAlertWithTitle:@"결과" message:[NSString stringWithFormat:@"%@\n총 개수 합계 : %d", message, totalCount]];
-}
-
--(void)startConcurrentOperationQueue{
-    [queue setSuspended:NO];
-}
-
--(void)setupConcurruentOperationQueueWithMaxCount:(int)count{
-    queue = [[NSOperationQueue alloc] init];
-    [queue setMaxConcurrentOperationCount:count];
-    [queue setSuspended:YES];
-}
-
--(void)addConcurruentOperation:(void (^)())block{
-    NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:block];
-    [queue addOperation:op];
 }
 
 -(void)countWord:(NSString*)wordToCount inText:(NSString*)text AndAddToDic:(NSDictionary*)dic{
