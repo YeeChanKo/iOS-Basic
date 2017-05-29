@@ -33,20 +33,26 @@
 }
 
 - (IBAction)editingChanged:(id)sender {
-    // check if empty
-    if([_name.text length] != 0 && [_student_id.text length] != 0 && [_grade.text length] != 0){
-        // check if same id exists
+    static BOOL nonExistsFlag;
+    
+    // if student id field is edited
+    if(sender == _student_id){
         NSArray<Student*> *results = [studentDataManager retrieveStudentsWithStudentId:_student_id.text];
         if([results count] == 0){
             _warning.hidden = YES;
-            _addButton.enabled = YES;
-            return;
+            nonExistsFlag = YES;
         }else{
+            nonExistsFlag = NO;
             _warning.hidden = NO;
         }
     }
-    _addButton.enabled = NO;
-    return;
+    
+    // check if empty
+    if([_name.text length] != 0 && [_student_id.text length] != 0 && [_grade.text length] != 0 && nonExistsFlag){
+        _addButton.enabled = YES;
+    }else{
+        _addButton.enabled = NO;
+    }
 }
 
 - (BOOL)isNumberOnString:(NSString*)input {
