@@ -12,6 +12,7 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *name;
 @property (weak, nonatomic) IBOutlet UITextField *student_id;
+@property (weak, nonatomic) IBOutlet UILabel *warning;
 @property (weak, nonatomic) IBOutlet UISwitch *gender;
 @property (weak, nonatomic) IBOutlet UITextField *grade;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
@@ -28,6 +29,7 @@
     
     studentDataManager = [StudentDataManager getInstance];
     _addButton.enabled = NO;
+    _warning.hidden = YES;
 }
 
 - (IBAction)editingChanged:(id)sender {
@@ -36,8 +38,11 @@
         // check if same id exists
         NSArray<Student*> *results = [studentDataManager retrieveStudentsWithStudentId:_student_id.text];
         if([results count] == 0){
+            _warning.hidden = YES;
             _addButton.enabled = YES;
             return;
+        }else{
+            _warning.hidden = NO;
         }
     }
     _addButton.enabled = NO;
