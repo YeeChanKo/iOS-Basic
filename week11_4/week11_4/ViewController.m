@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *student_id;
 @property (weak, nonatomic) IBOutlet UISwitch *gender;
 @property (weak, nonatomic) IBOutlet UITextField *grade;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 
 @end
 
@@ -26,8 +27,27 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     studentDataManager = [StudentDataManager getInstance];
+    _addButton.enabled = NO;
 }
 
+- (IBAction)editingChanged:(id)sender {
+    // check if empty
+    if([_name.text length] != 0 && [_student_id.text length] != 0 && [_grade.text length] != 0){
+        // check if same id exists
+        NSArray<Student*> *results = [studentDataManager retrieveStudentsWithStudentId:_student_id.text];
+        if([results count] == 0){
+            _addButton.enabled = YES;
+            return;
+        }
+    }
+    _addButton.enabled = NO;
+    return;
+}
+
+- (BOOL)isNumberOnString:(NSString*)input {
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    return ([input rangeOfCharacterFromSet:notDigits].location == NSNotFound);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -35,6 +55,18 @@
 }
 
 - (IBAction)addButtonClicked:(id)sender {
+    
+    // check if student id is a number
+    if(![self isNumberOnString:_student_id.text]){
+        [self presentAlertWithTitle:@"check your student id" message:@"student id need to be numeral characters"];
+        return;
+    }
+    
+    // check if grade is a number
+    if(![self isNumberOnString:_grade.text]){
+        [self presentAlertWithTitle:@"check your grade" message:@"grade need to be numeral characters"];
+        return;
+    }
     
     // get inputs
     NSString *name = _name.text;
@@ -51,16 +83,22 @@
     [_gender setOn:YES];
     _grade.text = @"";
     
-    // move to the list
+    // init cursor focus to name field
+    [_name becomeFirstResponder];
+    
+    // move to the list tab
     [self.tabBarController setSelectedIndex: 0];
 }
 
 -(void)presentAlertWithTitle:(NSString*)title message:(NSString*)message{
-    UIAlertController* alertController = [UIAlertController
+    UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:title
                                           message:message
                                           preferredStyle:UIAlertControllerStyleAlert];
     
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 

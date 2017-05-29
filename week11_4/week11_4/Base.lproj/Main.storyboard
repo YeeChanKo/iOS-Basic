@@ -48,6 +48,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="NAw-aD-nl2"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PWF-ta-nS2">
                                 <rect key="frame" x="155" y="156" width="141" height="30"/>
@@ -55,6 +58,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="qJe-0q-f69"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iPl-Rd-88i">
                                 <rect key="frame" x="155" y="240" width="141" height="30"/>
@@ -62,6 +68,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="xUm-wF-alA"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Grade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B42-UK-MeV">
                                 <rect key="frame" x="90" y="245" width="47" height="21"/>
@@ -101,6 +110,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" image="edit.png" id="Rs3-JJ-EsX"/>
                     <connections>
+                        <outlet property="addButton" destination="Pzq-cH-764" id="WgU-dW-mIR"/>
                         <outlet property="gender" destination="Ttx-hT-Q1P" id="eMm-Af-fzJ"/>
                         <outlet property="grade" destination="iPl-Rd-88i" id="b3F-qv-aus"/>
                         <outlet property="name" destination="QFW-WQ-Tkk" id="1ic-zM-rmQ"/>
