@@ -16,6 +16,8 @@
 		704C7D421ED5D9E6001FE9C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 704C7D401ED5D9E6001FE9C4 /* LaunchScreen.storyboard */; };
 		704C7D4B1ED5DB06001FE9C4 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 704C7D4A1ED5DB06001FE9C4 /* TableViewController.m */; };
 		704C7D4E1ED6AC59001FE9C4 /* StudentDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 704C7D4D1ED6AC59001FE9C4 /* StudentDataManager.m */; };
+		70688C701EDBF7C80020B4A3 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 70688C6E1EDBF7C80020B4A3 /* edit.png */; };
+		70688C711EDBF7C80020B4A3 /* group.png in Resources */ = {isa = PBXBuildFile; fileRef = 70688C6F1EDBF7C80020B4A3 /* group.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		704C7D4A1ED5DB06001FE9C4 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		704C7D4C1ED6AC59001FE9C4 /* StudentDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentDataManager.h; sourceTree = "<group>"; };
 		704C7D4D1ED6AC59001FE9C4 /* StudentDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentDataManager.m; sourceTree = "<group>"; };
+		70688C6E1EDBF7C80020B4A3 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		70688C6F1EDBF7C80020B4A3 /* group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 		704C7D2E1ED5D9E6001FE9C4 /* week11_4 */ = {
 			isa = PBXGroup;
 			children = (
+				70688C6E1EDBF7C80020B4A3 /* edit.png */,
+				70688C6F1EDBF7C80020B4A3 /* group.png */,
 				704C7D321ED5D9E6001FE9C4 /* AppDelegate.h */,
 				704C7D331ED5D9E6001FE9C4 /* AppDelegate.m */,
 				704C7D4C1ED6AC59001FE9C4 /* StudentDataManager.h */,
@@ -151,7 +157,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				704C7D421ED5D9E6001FE9C4 /* LaunchScreen.storyboard in Resources */,
+				70688C701EDBF7C80020B4A3 /* edit.png in Resources */,
 				704C7D3F1ED5D9E6001FE9C4 /* Assets.xcassets in Resources */,
+				70688C711EDBF7C80020B4A3 /* group.png in Resources */,
 				704C7D3A1ED5D9E6001FE9C4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

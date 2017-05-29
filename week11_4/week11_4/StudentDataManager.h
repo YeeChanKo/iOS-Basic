@@ -17,5 +17,8 @@
 @property (strong, nonatomic) NSFetchedResultsController<Student*> *fetchedResultsController;
 
 +(instancetype)getInstance;
+-(void)createStudentWithName:(NSString*)name student_id:(NSString*)student_id gender:(BOOL)gender grade:(int)grade;
+-(NSArray<Student*>*)retrieveStudentsWithStudentId:(NSString*)student_id;
+-(void)deleteStudentWithStudentId:(NSString*)student_id;
 
 @end

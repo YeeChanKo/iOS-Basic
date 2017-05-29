@@ -13,22 +13,32 @@
 
 @end
 
-@implementation TableViewController
+@implementation TableViewController{
+    StudentDataManager *studentDataManager;
+    NSFetchedResultsController *fetchedResultsController;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    // prevents status bar overlapping
+    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    // add notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTableView:) name:StudentDataManager.STUDENT_DATA_CHANGED object:nil];
+    NSLog(@"notification added");
+    
+    // member variables initialzation
+    studentDataManager = [StudentDataManager getInstance];
+    fetchedResultsController = [studentDataManager fetchedResultsController];
+    
+    // test
+    [studentDataManager deleteStudentWithStudentId:@"140000"];
 }
 
 -(void)updateTableView:(NSNotification*)noti{
     NSLog(@"update table view called");
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,22 +49,21 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return [[fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    id<NSFetchedResultsSectionInfo> sectionInfo = [fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"default" forIndexPath:indexPath];
+    Student *student = [fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = student.name;
+    cell.detailTextLabel.text = student.student_id;
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
