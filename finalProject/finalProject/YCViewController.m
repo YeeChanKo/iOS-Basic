@@ -26,6 +26,9 @@ static NSString * const reuseIdentifier = @"default";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // inset status bar and tab bar
+    self.collectionView.contentInset = UIEdgeInsetsMake(20, 0, 50, 0);
+    
     memos = [YCMemo allObjects];
     
     // instantiate detailviewcontroller for edit
@@ -73,6 +76,21 @@ static NSString * const reuseIdentifier = @"default";
     YCMemo *memo = [memos objectAtIndex:[indexPath row]];
     detailViewController.memoToEdit = memo;
     [self presentViewController:detailViewController animated:YES completion:nil];
+}
+
+#pragma mark collection view layout settings
+// Layout: Set cell size
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    int itemPerRow = 3;
+    CGFloat deviceMaxWidth = CGRectGetMaxX(self.view.bounds);
+    CGFloat itemWidth = (deviceMaxWidth - 10 * (itemPerRow + 1)) / itemPerRow;
+    CGSize cellSize = CGSizeMake(itemWidth, itemWidth);
+    return cellSize;
+}
+
+- (UIEdgeInsets)collectionView:
+(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,10,10,10);  // top, left, bottom, right
 }
 
 @end
