@@ -11,6 +11,7 @@
 
 @interface YCDetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextView *textview;
-- (void)setupForEdit:(YCMemo*)memo;
+@property YCMemo *memoToEdit;
+@property BOOL editFlag;
 @end
 

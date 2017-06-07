@@ -12,10 +12,7 @@
 
 @end
 
-@implementation YCDetailViewController {
-    YCMemo *memoToEdit;
-    BOOL editFlag;
-}
+@implementation YCDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,8 +22,12 @@
     [[self.textview layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.textview layer] setBorderWidth:1];
     [[self.textview layer] setCornerRadius:10];
-    
-    editFlag = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if(_editFlag){
+        self.textview.text = _memoToEdit.content;
+    }
 }
 
 
@@ -41,22 +42,21 @@
     memo.date = [NSDate date];
     memo.author = @"viz";
     
-    if(!editFlag){
+    if(!_editFlag){
         memo.uuid = [[NSUUID UUID] UUIDString];
     }else{
-        memo.uuid = memoToEdit.uuid;
+        memo.uuid = _memoToEdit.uuid;
     }
     
     [memo save];
-    editFlag = NO;
     self.textview.text = @""; // clear
-    [self.tabBarController setSelectedIndex:0];
-}
-
-- (void)setupForEdit:(YCMemo*)memo{
-    memoToEdit = memo;
-    self.textview.text = memoToEdit.content;
-    editFlag = YES;
+    
+    if(!_editFlag){
+        [self.tabBarController setSelectedIndex:0];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 
 @end

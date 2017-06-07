@@ -31,7 +31,7 @@
         <!--Detail View Controller-->
         <scene sceneID="w4t-kN-bAa">
             <objects>
-                <viewController id="zpP-Nd-wzR" customClass="YCDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detail" id="zpP-Nd-wzR" customClass="YCDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ysz-1v-UXN"/>
                         <viewControllerLayoutGuide type="bottom" id="KTm-Z0-Vd7"/>
