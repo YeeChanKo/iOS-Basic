@@ -37,17 +37,14 @@
 
 - (IBAction)doneButtonClicked:(id)sender {
     YCMemo *memo = [[YCMemo alloc] init];
+    memo.content = self.textview.text;
+    memo.date = [NSDate date];
+    memo.author = @"viz";
     
     if(!editFlag){
         memo.uuid = [[NSUUID UUID] UUIDString];
-        memo.content = self.textview.text;
-        memo.author = @"viz";
-        memo.date = [NSDate date];
     }else{
         memo.uuid = memoToEdit.uuid;
-        memo.content = self.textview.text;
-        memo.author = memoToEdit.author;
-        memo.date = [NSDate date];
     }
     
     [memo save];
