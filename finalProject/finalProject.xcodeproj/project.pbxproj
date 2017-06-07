@@ -10,12 +10,12 @@
 		691F4D256F91577A71266E3B /* Pods_finalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90858720ADAD36A8CBBD12ED /* Pods_finalProject.framework */; };
 		7013FA0E1EE806F500B12927 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7013FA0D1EE806F500B12927 /* main.m */; };
 		7013FA111EE806F500B12927 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7013FA101EE806F500B12927 /* AppDelegate.m */; };
-		7013FA171EE806F500B12927 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7013FA161EE806F500B12927 /* DetailViewController.m */; };
+		7013FA171EE806F500B12927 /* YCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7013FA161EE806F500B12927 /* YCDetailViewController.m */; };
 		7013FA1A1EE806F500B12927 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7013FA181EE806F500B12927 /* Main.storyboard */; };
 		7013FA1C1EE806F500B12927 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7013FA1B1EE806F500B12927 /* Assets.xcassets */; };
 		7013FA1F1EE806F500B12927 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7013FA1D1EE806F500B12927 /* LaunchScreen.storyboard */; };
 		707C5D6A1EE81B960003074C /* YCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 707C5D691EE81B960003074C /* YCCollectionViewCell.m */; };
-		70EB0EF51EE8089700255673 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EB0EF41EE8089700255673 /* ViewController.m */; };
+		70EB0EF51EE8089700255673 /* YCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EB0EF41EE8089700255673 /* YCViewController.m */; };
 		70EB0EF81EE80EA000255673 /* YCMemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EB0EF71EE80EA000255673 /* YCMemo.m */; };
 /* End PBXBuildFile section */
 
@@ -25,16 +25,16 @@
 		7013FA0D1EE806F500B12927 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7013FA0F1EE806F500B12927 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7013FA101EE806F500B12927 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7013FA151EE806F500B12927 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		7013FA161EE806F500B12927 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		7013FA151EE806F500B12927 /* YCDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YCDetailViewController.h; sourceTree = "<group>"; };
+		7013FA161EE806F500B12927 /* YCDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YCDetailViewController.m; sourceTree = "<group>"; };
 		7013FA191EE806F500B12927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7013FA1B1EE806F500B12927 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7013FA1E1EE806F500B12927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7013FA201EE806F500B12927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		707C5D681EE81B960003074C /* YCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCCollectionViewCell.h; sourceTree = "<group>"; };
 		707C5D691EE81B960003074C /* YCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCCollectionViewCell.m; sourceTree = "<group>"; };
-		70EB0EF31EE8089700255673 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		70EB0EF41EE8089700255673 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		70EB0EF31EE8089700255673 /* YCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCViewController.h; sourceTree = "<group>"; };
+		70EB0EF41EE8089700255673 /* YCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCViewController.m; sourceTree = "<group>"; };
 		70EB0EF61EE80EA000255673 /* YCMemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCMemo.h; sourceTree = "<group>"; };
 		70EB0EF71EE80EA000255673 /* YCMemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCMemo.m; sourceTree = "<group>"; };
 		90858720ADAD36A8CBBD12ED /* Pods_finalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_finalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,10 +93,10 @@
 			children = (
 				7013FA0F1EE806F500B12927 /* AppDelegate.h */,
 				7013FA101EE806F500B12927 /* AppDelegate.m */,
-				70EB0EF31EE8089700255673 /* ViewController.h */,
-				70EB0EF41EE8089700255673 /* ViewController.m */,
-				7013FA151EE806F500B12927 /* DetailViewController.h */,
-				7013FA161EE806F500B12927 /* DetailViewController.m */,
+				70EB0EF31EE8089700255673 /* YCViewController.h */,
+				70EB0EF41EE8089700255673 /* YCViewController.m */,
+				7013FA151EE806F500B12927 /* YCDetailViewController.h */,
+				7013FA161EE806F500B12927 /* YCDetailViewController.m */,
 				7013FA181EE806F500B12927 /* Main.storyboard */,
 				707C5D681EE81B960003074C /* YCCollectionViewCell.h */,
 				707C5D691EE81B960003074C /* YCCollectionViewCell.m */,
@@ -240,9 +240,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7013FA171EE806F500B12927 /* DetailViewController.m in Sources */,
+				7013FA171EE806F500B12927 /* YCDetailViewController.m in Sources */,
 				7013FA111EE806F500B12927 /* AppDelegate.m in Sources */,
-				70EB0EF51EE8089700255673 /* ViewController.m in Sources */,
+				70EB0EF51EE8089700255673 /* YCViewController.m in Sources */,
 				70EB0EF81EE80EA000255673 /* YCMemo.m in Sources */,
 				707C5D6A1EE81B960003074C /* YCCollectionViewCell.m in Sources */,
 				7013FA0E1EE806F500B12927 /* main.m in Sources */,

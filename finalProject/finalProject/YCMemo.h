@@ -11,7 +11,7 @@
 
 @interface YCMemo : RLMObject
 
-@property NSInteger id;
+@property NSString *uuid;
 @property NSString *content;
 @property NSString *author;
 @property NSDate *date;

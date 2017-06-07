@@ -23,13 +23,12 @@
 }
 
 +(NSString *)primaryKey {
-    return @"id";
+    return @"uuid";
 }
 
 -(void)save {
     [realm transactionWithBlock:^{
         [realm addOrUpdateObject:self];
-        NSLog(@"%@ saved", self);
     }];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DATA_MODEL_CHANGED" object:nil];
 }

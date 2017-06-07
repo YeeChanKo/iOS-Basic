@@ -6,17 +6,19 @@
 //  Copyright © 2017년 viz. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "YCViewController.h"
 #import <Realm/Realm.h>
 #import "YCMemo.h"
 #import "YCCollectionViewCell.h"
+#import "YCDetailViewController.h"
 
-@interface ViewController ()
+@interface YCViewController ()
 
 @end
 
-@implementation ViewController {
+@implementation YCViewController {
     RLMResults<YCMemo*> *memos;
+    YCDetailViewController *detailViewController;
 }
 
 static NSString * const reuseIdentifier = @"default";
@@ -27,12 +29,14 @@ static NSString * const reuseIdentifier = @"default";
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
+    // 스토리보드로 할 때는 이 부분 필요 없음
     // Register cell classes
     // [self.collectionView registerClass:[YCCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
     
     memos = [YCMemo allObjects];
+    detailViewController = [[self.tabBarController viewControllers] objectAtIndex:1];
     
     NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
     [notiCenter addObserver:self selector:@selector(dataModelChanged) name:@"DATA_MODEL_CHANGED" object:nil];
@@ -65,19 +69,12 @@ static NSString * const reuseIdentifier = @"default";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"%lu", (unsigned long)[memos count]);
     return [memos count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     YCCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    NSLog(@"called");
-    
-    // Configure the cell
-    NSLog(@"%ld", (long)[indexPath row]);
     YCMemo *memo = [memos objectAtIndex:[indexPath row]];
-    NSLog(@"%@", memo);
-    
     cell.content.text = memo.content;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
@@ -86,6 +83,14 @@ static NSString * const reuseIdentifier = @"default";
 }
 
 #pragma mark <UICollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    YCMemo *memo = [memos objectAtIndex:[indexPath row]];
+    
+    // move first to ensure the controller is initialized
+    [self.tabBarController setSelectedIndex:1];
+    [detailViewController setupForEdit:memo];
+}
 
 /*
  // Uncomment this method to specify if the specified item should be highlighted during tracking

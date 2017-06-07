@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YCMemo.h"
 
-@interface DetailViewController : UIViewController
+@interface YCDetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextView *textview;
-
-
+- (void)setupForEdit:(YCMemo*)memo;
 @end
 
